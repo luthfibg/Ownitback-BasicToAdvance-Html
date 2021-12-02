@@ -1,12 +1,46 @@
 <?php
 @session_start();
+error_reporting(0);
 include "include/connection.php";
+
+// if ($_SESSION['admin'] || $_SESSION['operator']) {
+// 	header("location: index.php");
+// } else {
+
+	if (isset($_SESSION['user'])){
+		header("location: index.php");
+	}
+	if (isset($_POST['login'])){
+		$user = $_POST['user'];
+		$pass = md5($_POST('pass'));
+
+		$sql = "select * from tb_owlogin where username='$user' and password='$pass' ";
+		$result = mysqli_query($connect, $sql);
+
+		if ($result -> num_rows > 0){
+			$row = mysqli_fetch_assoc('$result');
+			if($row['level'] == "admin"){
+				$_SESSION['admin'] = $row['id_user'];
+				header("index.php");
+			} else if ($row['level'] == "operator") {
+				$_SESSION['operator'] = $row['id_user'];
+				header("index.php");
+			}
+		} else {
+			echo "<script>alert('Check it back your username or password')</script>";
+		}
+	}
+
+// if (@$_SESSION['admin'] || @$_SESSION['operator']) {
+// 	header("location: index.php");
+// } else {
+
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="php" href="login-handler.php">
+	<!-- <link rel="stylesheet" type="php" href="login-handler.php"> -->
 	<title>Login User</title>
 	<style type="text/css">
 		body {
@@ -79,40 +113,12 @@ include "include/connection.php";
 					<input type="submit" name="login" value="Login" class="btn">
 				</div>
 			</form>
-			<?php
-
-				$user = @$_POST['user'];
-				$pass = @$_POST['pass'];
-				$login = @$_POST['login'];
-
-				if ($login) {
-					if ($user == "" && $pass == "") {
-						echo "<script type='text/Javascript'>alert('Username and Password can't be empty)</script>";
-					} else if ($user == "") {
-						echo "<script type='text/Javascript'>alert('Username can't be empty')</script>";
-					} else if ($pass == "") {
-						echo "<script type='text/Javascript'>alert('Password can't be empty')</script>";
-					} else {
-						$sql = mysqli_query($connect, "select * from tb_owlogin where username = '$user' and password = md5('$pass')") or die (mysqli_error());
-						$data = mysqli_fetch_array($sql);
-						$check = mysqli_num_rows($sql);
-
-						if($check > 0){
-							if($data['level'] == "admin"){
-								@$SESSION['admin'] = $data['id_user'];
-								header("location: index.php");
-							} else if ($data['level'] == "operator"){
-								@$SESSION['operator'] = $data['id_user'];
-								header("location: index.php");
-							}
-						} else {
-
-						}
-					}
-				}
-
-			?>
 		</div>
 	</div>
 </body>
 </html>
+<!-- <?php
+
+// }
+
+?> -->

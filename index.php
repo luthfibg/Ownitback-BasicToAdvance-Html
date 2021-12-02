@@ -1,6 +1,12 @@
 <?php
-@session_start();
+
 include "include/connection.php";
+error_reporting(0);
+@session_start();
+
+
+// if (@$_SESSION['admin'] || @$_SESSION['operator']) {
+
 ?>
 
 <!DOCTYPE html>
@@ -87,6 +93,7 @@ include "include/connection.php";
 					</ul>
 				</li>
 				<li class="utama"><a href="">Pelanggan</a></li>
+				<li class="utama" style="float: right;"><a href="include/logout.php">Logout</a></li>
 			</ul>
 		</div>
 		<div id="content">This is content part</div>
@@ -94,3 +101,9 @@ include "include/connection.php";
 	</div>
 </body>
 </html>
+
+<!-- <?php
+// } else {
+// 	header("location: login-user.php");
+// }
+?> -->
