@@ -1,0 +1,19 @@
+Logo and System Name
+Profile
+Dashboard
+Service
+> Registration
+> Treatment
+> Referral Letter
+> Doctor Confirmation Letter
+Medical Record
+> Show mine
+Room
+Clinics
+> Live Data
+> About Clinic
+Settings
+Help
+
+
+

@@ -1,0 +1,27 @@
+Logo and System Name
+Profile
+Dashboard
+Notification
+Service
+> Registration
+> Treatment
+> Referral Letter
+> Doctor Confirmation Letter
+Medical Record
+> Show mine
+> Manage Data
+Room
+Medicine
+> Manage Stock
+Clinics
+> Doctor
+> Petugas
+> Patient
+> About Clinic
+> Live Data
+Manage Report
+Settings
+Help
+
+
+
